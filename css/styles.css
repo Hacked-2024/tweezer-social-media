@@ -1,4 +1,10 @@
 footer{
     text-align: center;
-    
+    background-color:	#189BCC;
+    padding: 2rem 0;
+}
+
+footer .container p{
+    text-align: center;
+    color: #1f195e;
 }
