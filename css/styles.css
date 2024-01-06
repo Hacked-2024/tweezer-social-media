@@ -1,15 +1,23 @@
-footer{
+footer {
     text-align: center;
-    background-color:	#189BCC;
+    background-color: #189BCC;
     padding: 2rem 0;
 }
 
-footer .container p{
+footer .container p {
     text-align: center;
     color: #1f195e;
 }
 
-.posts .card{
-    width: 40px; 
+.posts .card {
+    width: 40px;
     height: 40px;
+}
+
+/* Apply Bootstrap utility classes to adjust the size of the icons */
+.navbar-nav .nav-link svg {
+    width: 1.5rem;
+    /* Adjust the width of the icons */
+    height: 1.5rem;
+    /* Adjust the height of the icons */
 }
