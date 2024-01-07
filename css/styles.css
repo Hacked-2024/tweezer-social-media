@@ -4,6 +4,7 @@ footer {
     padding: 2.2rem 0;
     bottom: 0;
     width: 100%;
+    margin-top: 10rem;
 }
 
 .blur-image {
@@ -13,7 +14,7 @@ footer {
 
 footer .container p {
     text-align: center;
-    color: #1f195e;
+    color: white;
 }
 
 .profile {
@@ -24,7 +25,7 @@ footer .container p {
 .header-icon {
     width: 1.7rem;
     height: 1.7rem;
-    color: black;
+    fill: white;
 }
 
 .bg-custom {
@@ -128,20 +129,30 @@ main {
     margin: 0 0.6rem 0 2rem;
 }
 
-.warning-banner{
+.warning-banner {
     background-color: rgb(255, 174, 0);
     padding: 1rem;
     padding-top: 1.5rem;
     display: flex;
 }
 
-.warning-banner svg{
+.warning-banner svg {
     color: rgb(198, 35, 35);
     width: 2rem;
     height: 2rem;
     margin-right: 1rem;
 }
 
-.warning-banner p{
+.warning-banner p {
     font-size: 1.2rem;
+}
+
+header .navbar-brand {
+    font-family: 'Sometype Mono', monospace;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white !important;
 }
