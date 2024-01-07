@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     var filters = sessionStorage.getItem('filters');
     var savedMisinformationFilter = sessionStorage.getItem('misinformationFilter');
-    console.log(savedMisinformationFilter)
     const postCards = document.querySelectorAll('.card');
 
     if (filters && filters !== "") {
@@ -20,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 
-    if (savedMisinformationFilter) {
+    if (savedMisinformationFilter == true) {
         const promises = Array.from(postCards).map(async (postCard) => {
             const caption = postCard.querySelector('.caption').innerText;
             const result = await detectMisinformation(caption);
@@ -179,7 +178,7 @@ function addNewPost() {
 
     postForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        addNewPost(savedMisinformationFilter);
+        addNewPost(savedMisinformationFilter == true);
         newPostFormContainer.style.display = "none";
     });
 });
