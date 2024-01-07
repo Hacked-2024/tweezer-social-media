@@ -57,7 +57,26 @@
     </header>
     
 <main>
-    
+    <!-- Add New Post Section -->
+    <section id="add-post-section" class="mb-4">
+        <div class="container">
+        <h2>Add New Post</h2>
+        <button id="add-post-button" class="btn btn-primary">Create New Post</button>
+        <div id="new-post-form" class="d-none mt-3">
+            <form id="post-form">
+            <div class="mb-3">
+                <label for="imageInput" class="form-label">Image URL:</label>
+                <input type="url" class="form-control" id="imageInput" placeholder="Enter image URL" required>
+            </div>
+            <div class="mb-3">
+                <label for="captionInput" class="form-label">Caption:</label>
+                <textarea class="form-control" id="captionInput" rows="3" placeholder="Enter caption" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Add Post</button>
+            </form>
+        </div>
+        </div>
+    </section>
 
     <section class="posts">
         <div class="container mt-4">
@@ -495,6 +514,7 @@
         <p>This website was created for HackED 2024 by the My Five Tender Toesies team. All posts were created for API testing purposes only.</p>
     </div>
 </footer>
+<script src="js/main.js"></script>
 </body>
 </html>
 
