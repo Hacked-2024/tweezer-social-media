@@ -159,6 +159,6 @@ header .navbar-brand {
     color: white;
 }
 
-.navbar-brand:hover {
+header .navbar-brand:hover {
     color: white !important;
 }
