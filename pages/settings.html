@@ -61,37 +61,33 @@
 <main>
     <section class="settings">
         
-        <div class="container my-5">
-                <h2>Content Settings</h2>
-                <p>Filter harmful, hateful and misinformative content from your feed.</p>
-            <form>
-                <div class="mb-3">
-                    <div>
-                        <label class="form-label">Select from harmful content filters:</label>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Hate Speech Filters">
-                      <button type="button" class="btn btn-outline-primary" data-filter="racism">Racism</button>
-                      <button type="button" class="btn btn-outline-primary" data-filter="sexism">Sexism</button>
-                      <button type="button" class="btn btn-outline-primary" data-filter="homophobiaTransphobia">Homophobia and Transphobia</button>
-                      <button type="button" class="btn btn-outline-primary" data-filter="harassment">General Harassment</button>
-                      <button type="button" class="btn btn-outline-primary" data-filter="nsfw">Sexual Harassment</button>
-                      <button type="button" class="btn btn-outline-primary" data-filter="nsfw">Violence</button>
-                    </div>
-                  </div>
-        
-              <div class="mb-3">
-                <label for="customFilter" class="form-label">Custom filter:</label>
-                <input type="text" class="form-control" id="customFilter" placeholder="Enter custom filter. Seperate multiple filters with a comma.">
-              </div>
-        
-              <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="misinformationFilter">
-                <label class="form-check-label" for="misinformationFilter">Toggle misinformation filter on or off</label>
-              </div>
-        
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+      <div class="container my-5">
+        <h2>Content Settings</h2>
+        <p>Filter harmful, hateful and misinformative content from your feed.</p>
+        <form id="contentSettingsForm">
+          <div class="mb-3">
+            <div>
+              <label class="form-label">Select from harmful content filters:</label>
+            </div>
+            <div class="btn-group" role="group" aria-label="Hate Speech Filters">
+              <button type="button" class="btn btn-outline-primary filter-btn" data-filter="racism">Racism</button>
+              <button type="button" class="btn btn-outline-primary filter-btn" data-filter="sexism">Sexism</button>
+              <button type="button" class="btn btn-outline-primary filter-btn" data-filter="lgbt-hate">Homophobia and Transphobia</button>
+              <button type="button" class="btn btn-outline-primary filter-btn" data-filter="general-harassment">General Harassment</button>
+              <button type="button" class="btn btn-outline-primary filter-btn" data-filter="sexual-harassment">Sexual Harassment</button>
+              <button type="button" class="btn btn-outline-primary filter-btn" data-filter="violence-or-threats-of-violence">Violence</button>
+            </div>
           </div>
+
+      
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="misinformationFilter">
+            <label class="form-check-label" for="misinformationFilter">Toggle misinformation filter on or off</label>
+          </div>
+      
+          <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+        </form>
+      </div>
         
     </section>
 
@@ -122,12 +118,10 @@
           // Get values from form elements using their IDs
           const hateSpeechFilters = Array.from(document.querySelectorAll('.btn-primary[data-filter]'))
                                          .map(button => button.dataset.filter);
-          const customFilter = document.getElementById('customFilter').value;
           const misinformationFilter = document.getElementById('misinformationFilter').checked;
     
           // Perform further actions with the retrieved values
           console.log('Hate Speech Filters:', hateSpeechFilters);
-          console.log('Custom Filter:', customFilter);
           console.log('Misinformation Filter:', misinformationFilter);
         }
       </script>

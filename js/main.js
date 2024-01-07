@@ -1,9 +1,40 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+    var filters = sessionStorage.getItem('filters');
+    var savedMisinformationFilter = sessionStorage.getItem('misinformationFilter');
+    console.log(savedMisinformationFilter)
+    const postCards = document.querySelectorAll('.card');
 
-    var retrievedData = sessionStorage.getItem('myArray');
-    var parsedArray = JSON.parse(retrievedData);
-    console.log(parsedArray);
-    
+    if (filters && filters !== "") {
+        const promises = Array.from(postCards).map(async (postCard) => {
+            const caption = postCard.querySelector('.caption').innerText;
+            const result = await performAsyncPostRequest(caption, filters);
+
+            if (result && result.filtered === "0") {
+                postCard.classList.add('good-post');
+            }
+        });
+        await Promise.all(promises);
+    } else {
+        const promises = Array.from(postCards).map(async (postCard) => {
+            postCard.classList.add('good-post');
+        });
+    }
+
+    if (savedMisinformationFilter) {
+        const promises = Array.from(postCards).map(async (postCard) => {
+            const caption = postCard.querySelector('.caption').innerText;
+            const result = await detectMisinformation(caption);
+
+            if (result && parseFloat(result.truthfulness) >= 7) {
+                const misinformationSection = postCard.querySelector('.misinformation');
+                if (misinformationSection) {
+                    misinformationSection.style.display = 'block';
+                }
+            }
+        });
+        await Promise.all(promises);
+    }
+
     var cardContent = [];
 
     function saveCardContent(imageSrc, caption) {
@@ -11,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     var cards = document.querySelectorAll(".card");
-    cards.forEach(function (card, index) {
+    cards.forEach(function (card) {
         var imageSrc = card.querySelector(".post-img").src;
         var caption = card.querySelector(".caption").innerText;
         saveCardContent(imageSrc, caption);
@@ -36,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     openPostFormButton.addEventListener("click", function () {
         newPostFormContainer.style.display = newPostFormContainer.style.display === "none" ? "block" : "none";
-
     });
 
     // Function to add a new post
@@ -124,6 +154,18 @@ function addNewPost() {
     // Attach click event to "View Anyway" button for user-added posts
     var viewAnywayButton = textOverCardDiv.querySelector(".view-anyway");
     viewAnywayButton.addEventListener("click", handleViewAnywayButtonClick);
+    if (filters && filters !== "") {
+            const caption = captionInput.value;
+            console.log(caption)
+            const result = performPostRequest(caption, filters);
+
+            if (result && result.filtered === "0") {
+                newCard.classList.add('good-post');
+            }
+        ;
+    } else {
+        newCard.classList.add('good-post');
+    }
 
     // Insert the new card at the top
     postsContainer.insertBefore(newCard, postsContainer.firstChild);
@@ -132,12 +174,98 @@ function addNewPost() {
     imageInput.value = "";
     captionInput.value = "";
 }
+
     var postForm = document.getElementById("post-form");
 
     postForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        addNewPost();
-        // Hide the form after submitting
+        addNewPost(savedMisinformationFilter);
         newPostFormContainer.style.display = "none";
     });
 });
+
+async function performPostRequest(textInput, filter) {
+    try {
+        const response =  fetch('http://127.0.0.1:5000/filter-check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ textInput, filter }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error during post request:', error.message);
+    }
+}
+
+async function performAsyncPostRequest(textInput, filter) {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/filter-check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ textInput, filter }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error during post request:', error.message);
+    }
+}
+
+async function detectMisinformation(textInput) {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/fact-check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ textInput }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error('Error during post request:', error.message);
+    }
+}
+
+async function detectMisinformationNoAwait(textInput) {
+    try {
+        const response = fetch('http://127.0.0.1:5000/fact-check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ textInput }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error('Error during post request:', error.message);
+    }
+}
