@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    var retrievedData = sessionStorage.getItem('myArray');
+    var parsedArray = JSON.parse(retrievedData);
+    console.log(parsedArray);
     
     var cardContent = [];
 
@@ -114,7 +117,8 @@ function addNewPost() {
     textOverCardDiv.innerHTML = `
         <p>This post was blocked because it may contain harmful content.</p>
         <button class="btn btn-danger view-anyway">View Anyway</button>
-    `;
+  
+        `;
     cardFooter.appendChild(textOverCardDiv);
 
     // Attach click event to "View Anyway" button for user-added posts

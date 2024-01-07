@@ -127,3 +127,21 @@ main {
     height: 1.7rem;
     margin: 0 0.6rem 0 2rem;
 }
+
+.warning-banner{
+    background-color: rgb(255, 174, 0);
+    padding: 1rem;
+    padding-top: 1.5rem;
+    display: flex;
+}
+
+.warning-banner svg{
+    color: rgb(198, 35, 35);
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+}
+
+.warning-banner p{
+    font-size: 1.2rem;
+}
