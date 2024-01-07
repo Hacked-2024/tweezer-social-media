@@ -104,3 +104,12 @@ main{
 #new-post-form{
     display: none;
 }
+
+#add-post-section img{
+    margin-right: 0.8rem;
+}
+
+#add-post-section{
+    max-width: 41rem;
+    margin: 1rem auto;
+}

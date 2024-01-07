@@ -36,61 +36,98 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    function addNewPost() {
-        var imageInput = document.getElementById("imageInput");
-        var captionInput = document.getElementById("captionInput");
-        var postsContainer = document.querySelector(".posts .container");
+    // Function to add a new post
+function addNewPost() {
+    var imageInput = document.getElementById("imageInput");
+    var captionInput = document.getElementById("captionInput");
 
-        var newCard = document.createElement("div");
-        newCard.className = "card";
+    // Get the container for posts
+    var postsContainer = document.querySelector(".posts .container");
 
-        var cardHeader = document.createElement("div");
-        cardHeader.className = "card-header bg-white";
-        cardHeader.innerHTML =
-            '<img src="img/no-profile.webp" alt="Profile Picture" class="rounded-circle profile"> <span class="ml-2 font-weight-bold">@username</span>';
+    // Create a new card div
+    var newCard = document.createElement("div");
+    newCard.className = "card";
 
-        var cardBody = document.createElement("div");
-        cardBody.className = "card-body p-0";
-        var postImage = document.createElement("img");
-        postImage.src = imageInput.value;
-        postImage.alt = "Post Image";
-        postImage.className = "img-fluid post-img";
-        cardBody.appendChild(postImage);
+    // Card Header with User Information
+    var cardHeader = document.createElement("div");
+    cardHeader.className = "card-header bg-white";
+    cardHeader.innerHTML =
+        '<img src="img/no-profile.webp" alt="Profile Picture" class="rounded-circle profile"> <span class="ml-2 font-weight-bold">@username</span>';
 
-        var cardFooter = document.createElement("div");
-        cardFooter.className = "card-footer bg-white";
-        cardFooter.innerHTML = `
-            <div class="d-flex">
-                <div>
-                    <i class="far fa-heart"></i>
-                    <span class="ml-1"><svg class="like-icon" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 6.0002C10.2006 3.90318 7.19379 3.25513 4.93923 5.17539C2.68467 7.09565 2.36734 10.3063 4.13777 12.5774C5.6099 14.4656 10.0644 18.4481 11.5235 19.7371C11.6867 19.8813 11.8689 20.0286 12.0658 20.1777C12.1625 20.2449 12.2678 12.3799 20.3962C12.7921 20.6967 13.2079 20.6967 13.6201 20.3962C13.7322 20.3183 13.8375 20.2449 13.9342 20.1777C14.1311 20.0286 14.3133 19.8813 14.4765 19.7371C15.9356 18.4481 20.3901 14.4656 21.8622 12.5774C23.6327 10.3063 23.3153 7.09565 21.0608 5.17539C18.8062 3.25513 15.7994 3.90318 14 6.0002V8.3638H9V6.0002ZM9 9.3638H15V19.3638H9V9.3638ZM8 9.3638H7V19.3638H8V9.3638ZM16">
-                        </path>
-                    </svg></span>
-                </div>
-                <div>
-                    <i class="far fa-comment"></i>
-                    <span class="ml-1"><svg class="comment-icon" fill="none" viewBox="0 -.5 25 25" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m5.5 12c-1.2e-4 2.613 1.4551 5.0085 3.7741 6.2127 2.319 1.2042 5.1156 1.0165 7.2529-0.4867l2.973 0.274v-6c0-3.866-3.134-7-7-7-3.866 0-7 3.134-7 7z" clip-rule="evenodd" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
-                        <path d="m9.5 13.25c-0.41421 0-0.75 0.3358-0.75 0.75s0.33579 0.75 0.75 0.75v-1.5zm4 1.5c0.4142 0 0.75-0.3358 0.75-0.75s-0.3358-0.75-0.75-0.75v1.5zm-4-4.5c-0.41421 0-0.75 0.3358-0.75 0.75s0.33579 0.75 0.75 0.75v-1.5zm6 1.5c0.4142 0 0.75-0.3358 0.75-0.75s-0.3358-0.75-0.75-0.75v1.5zm-6 3h4v-1.5h-4v1.5zm0-3h6v-1.5h-6v1.5z" fill="#000"/>
-                    </svg></span>
-                </div>
-            </div>
-        `;
-        var captionElement = document.createElement("div");
-        captionElement.className = "caption";
-        var captionText = document.createElement("p");
-        captionText.innerText = captionInput.value;
-        captionElement.appendChild(captionText);
+    // Card Body with Post Image
+    var cardBody = document.createElement("div");
+    cardBody.className = "card-body p-0";
+    var postImage = document.createElement("img");
 
-        newCard.appendChild(cardHeader);
-        newCard.appendChild(cardBody);
-        newCard.appendChild(cardFooter);
-        cardFooter.appendChild(captionElement);
+    // Check if an image is selected
+    if (imageInput.files.length > 0) {
+        var reader = new FileReader();
 
-        postsContainer.insertBefore(newCard, postsContainer.firstChild);
+        reader.onload = function (e) {
+            postImage.src = e.target.result;
+            postImage.alt = "Post Image";
+            postImage.className = "img-fluid post-img";
+            cardBody.appendChild(postImage);
+        };
+
+        reader.readAsDataURL(imageInput.files[0]);
     }
 
+    // Card Footer with Like and Comment Icons
+    var cardFooter = document.createElement("div");
+    cardFooter.className = "card-footer bg-white";
+    cardFooter.innerHTML = `
+        <div class="d-flex">
+        <div>
+        <i class="far fa-heart"></i>
+        <span class="ml-1"><svg class="like-icon" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="m12 6.0002c-1.7994-2.097-4.8062-2.7451-7.0608-0.82485-2.2546 1.9202-2.572 5.1308-0.80145 7.4019 1.4721 1.8882 5.927 5.8707 7.3871 7.1597 0.1633 0.1442 0.245 0.2163 0.3403 0.2446 0.0831 0.0247 0.1741 0.0247 0.2573 0 0.0953-0.0283 0.1769-0.1004 0.3403-0.2446 1.4601-1.289 5.915-5.2715 7.3871-7.1597 1.7705-2.2711 1.4918-5.5018-0.8015-7.4019s-5.249-1.2722-7.0484 0.82485z" clip-rule="evenodd" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </svg>
+            </span>
+    </div>
+            <div>
+                <i class="far fa-comment"></i>
+                <span class="ml-1"><svg class="comment-icon" fill="none" viewBox="0 -.5 25 25" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m5.5 12c-1.2e-4 2.613 1.4551 5.0085 3.7741 6.2127 2.319 1.2042 5.1156 1.0165 7.2529-0.4867l2.973 0.274v-6c0-3.866-3.134-7-7-7-3.866 0-7 3.134-7 7z" clip-rule="evenodd" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                    <path d="m9.5 13.25c-0.41421 0-0.75 0.3358-0.75 0.75s0.33579 0.75 0.75 0.75v-1.5zm4 1.5c0.4142 0 0.75-0.3358 0.75-0.75s-0.3358-0.75-0.75-0.75v1.5zm-4-4.5c-0.41421 0-0.75 0.3358-0.75 0.75s0.33579 0.75 0.75 0.75v-1.5zm6 1.5c0.4142 0 0.75-0.3358 0.75-0.75s-0.3358-0.75-0.75-0.75v1.5zm-6 3h4v-1.5h-4v1.5zm0-3h6v-1.5h-6v1.5z" fill="#000"/>
+                </svg></span>
+            </div>
+        </div>
+    `;
+
+    // Create caption
+    var captionElement = document.createElement("div");
+    captionElement.className = "caption";
+    var captionText = document.createElement("p");
+    captionText.innerText = captionInput.value; // Use caption input value
+    captionElement.appendChild(captionText);
+
+    // Append elements to the post card
+    newCard.appendChild(cardHeader);
+    newCard.appendChild(cardBody);
+    newCard.appendChild(cardFooter);
+    cardFooter.appendChild(captionElement);
+
+    // Add the div under caption
+    var textOverCardDiv = document.createElement("div");
+    textOverCardDiv.className = "text-over-card";
+    textOverCardDiv.innerHTML = `
+        <p>This post was blocked because it may contain harmful content.</p>
+        <button class="btn btn-danger view-anyway">View Anyway</button>
+    `;
+    cardFooter.appendChild(textOverCardDiv);
+
+    // Attach click event to "View Anyway" button for user-added posts
+    var viewAnywayButton = textOverCardDiv.querySelector(".view-anyway");
+    viewAnywayButton.addEventListener("click", handleViewAnywayButtonClick);
+
+    // Insert the new card at the top
+    postsContainer.insertBefore(newCard, postsContainer.firstChild);
+
+    // Clear the form inputs
+    imageInput.value = "";
+    captionInput.value = "";
+}
     var postForm = document.getElementById("post-form");
 
     postForm.addEventListener("submit", function (event) {
