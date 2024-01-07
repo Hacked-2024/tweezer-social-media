@@ -101,6 +101,6 @@ main{
     display: none;
 }
 
-.new-post-form{
+#new-post-form{
     display: none;
 }
