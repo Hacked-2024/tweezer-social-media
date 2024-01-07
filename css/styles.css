@@ -1,25 +1,28 @@
-footer{
+footer {
     text-align: center;
-    background-color:	#189BCC;
-    padding: 2rem 0;
+    background-color: #189BCC;
+    padding: 2.2rem 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
-.blur-image{
+.blur-image {
     filter: blur(8px);
     -webkit-filter: blur(8px);
 }
 
-footer .container p{
+footer .container p {
     text-align: center;
     color: #1f195e;
 }
 
-.profile{
-    width: 3rem; 
+.profile {
+    width: 3rem;
     height: 3rem;
 }
 
-.header-icon{
+.header-icon {
     width: 1.7rem;
     height: 1.7rem;
     color: black;
@@ -28,88 +31,100 @@ footer .container p{
 .bg-custom {
     background-color: #189BCC;
     color: #1f195e;
-  }
+}
 
-.posts{
+.posts {
     max-width: 45rem;
     margin: 1rem auto;
 }
 
-.like-icon{
+.like-icon {
     margin-top: 0.3rem;
     width: 1.7rem;
     height: 1.7rem;
     color: rgb(219, 51, 79);
 }
 
-.comment-icon{
+.comment-icon {
     width: 2.2rem;
     height: 2.2rem;
 }
 
-.posts .card{
+.posts .card {
     margin: 2rem;
     position: relative;
 }
 
-.settings{
+.settings {
     margin: 0 auto;
-max-width: 50rem;;
+    max-width: 50rem;
+    ;
 }
 
-main{
+main {
     margin-top: auto;
 }
 
-  .text-over-card {
+.text-over-card {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1; /* Ensure the text is above the card content */
-    color: white; /* Set the text color */
+    z-index: 1;
+    /* Ensure the text is above the card content */
+    color: white;
+    /* Set the text color */
     padding: 10px;
-  }
+}
 
-.card-body{
-    overflow: hidden; 
+.card-body {
+    overflow: hidden;
     display: inline-block;
-    max-height: 40rem; /* Set your desired maximum height */
+    max-height: 40rem;
+    /* Set your desired maximum height */
     overflow: hidden;
 }
 
-.caption{
+.caption {
     display: none;
 }
 
-.card-body img{
+.card-body img {
     filter: blur(20px) brightness(0.3);
-    width: 100%; /* Ensure the image takes the full width of the container */
-    height: auto; /* Maintain the aspect ratio */
+    width: 100%;
+    /* Ensure the image takes the full width of the container */
+    height: auto;
+    /* Maintain the aspect ratio */
 
 }
 
-.good-post .caption{
+.good-post .caption {
     display: block;
 }
 
-.good-post img{
+.good-post img {
     filter: none;
 }
 
-.good-post .text-over-card{
+.good-post .text-over-card {
     display: none;
 }
 
-#new-post-form{
+#new-post-form {
     display: none;
 }
 
-#add-post-section img{
+#add-post-section img {
     margin-right: 0.8rem;
 }
 
-#add-post-section{
+#add-post-section {
     max-width: 41rem;
     margin: 1rem auto;
+}
+
+.logo {
+    width: 1.7rem;
+    height: 1.7rem;
+    margin: 0 0.6rem 0 2rem;
 }
