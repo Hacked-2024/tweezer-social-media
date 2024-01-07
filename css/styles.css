@@ -100,3 +100,7 @@ main{
 .good-post .text-over-card{
     display: none;
 }
+
+.new-post-form{
+    display: none;
+}
