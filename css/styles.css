@@ -28,6 +28,12 @@ footer .container p {
     fill: white;
 }
 
+.header-icon:hover {
+    width: 1.7rem;
+    height: 1.7rem;
+    fill: #1f195e;
+}
+
 .bg-custom {
     background-color: #189BCC;
     color: #1f195e;
