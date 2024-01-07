@@ -4,6 +4,11 @@ footer{
     padding: 2rem 0;
 }
 
+.blur-image{
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
 footer .container p{
     text-align: center;
     color: #1f195e;
@@ -44,4 +49,34 @@ footer .container p{
 
 .posts .card{
     margin: 2rem;
+    position: relative;
+}
+
+.settings{
+    margin: 0 auto;
+max-width: 50rem;;
+}
+
+main{
+    margin-top: auto;
+}
+
+  .text-over-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure the text is above the card content */
+    color: white; /* Set the text color */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px;
+    display: none; /* Hide by default */
+  }
+
+.bad-post{
+    filter: blur(8px);
+}
+
+.bad-post-msg{
+    display: flex;
 }
