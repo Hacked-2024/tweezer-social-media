@@ -1,21 +1,26 @@
+const filters = [];
+
 document.addEventListener("DOMContentLoaded", function () {
     // Check if there is data for filters
     const savedFilters = sessionStorage.getItem('filters');
     if (savedFilters) {
-        const filters = JSON.parse(savedFilters);
+        const currentFilters = JSON.parse(savedFilters);
 
         // Fill in the buttons based on saved filters
-        filters.forEach(filter => {
+        currentFilters.forEach(filter => {
             const button = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+            console.log(button);
             if (button) {
                 // Do not use button.checked for non-checkbox buttons
                 button.classList.add('active'); // Add a class to indicate active state
+                filters.push(filter);
             }
+            
         });
     }
 });
 
-const filters = [];
+console.log (filters);
 
 function handleFilterButtonClick(button) {
     const filterValue = button.dataset.filter;
@@ -29,12 +34,14 @@ function handleFilterButtonClick(button) {
         button.classList.add('active'); // Add a class to indicate active state
     } else {
         // If already in the array, remove it
+        console.log("already here!")
         filters.splice(index, 1);
-        button.classList.remove('active'); // Remove the class to indicate inactive state
+        button.classList.remove('active'); 
     }
 
     console.log(filters); // Optional: Log the array to see the changes
 }
+
 
 const filterButtons = document.querySelectorAll('.filter-btn');
 
@@ -55,4 +62,7 @@ function submitForm() {
     // For testing purposes, log the saved information
     console.log('Filters:', filters);
     console.log('Misinformation Filter:', misinformationFilter);
+
+    // Redirect to the home page
+    window.location.href = '../index.html';
 }

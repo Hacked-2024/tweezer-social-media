@@ -3,9 +3,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     var savedMisinformationFilter = sessionStorage.getItem('misinformationFilter');
     const postCards = document.querySelectorAll('.card');
 
-    if (filters && filters !== "") {
+    if (filters && filters !== "[]") {
         const promises = Array.from(postCards).map(async (postCard) => {
             const caption = postCard.querySelector('.caption').innerText;
+            console.log(caption);
             const result = await performAsyncPostRequest(caption, filters);
 
             if (result && result.filtered === "0") {
@@ -18,10 +19,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             postCard.classList.add('good-post');
         });
     }
+console.log("misinfo:", savedMisinformationFilter);
 
-    if (savedMisinformationFilter == true) {
+    if (savedMisinformationFilter == 'true') {
         const promises = Array.from(postCards).map(async (postCard) => {
             const caption = postCard.querySelector('.caption').innerText;
+            console.log(caption);
             const result = await detectMisinformation(caption);
 
             if (result && parseFloat(result.truthfulness) >= 7) {
@@ -69,7 +72,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     // Function to add a new post
-function addNewPost() {
+async function addNewPost() {
+    console.log('click')
     var imageInput = document.getElementById("imageInput");
     var captionInput = document.getElementById("captionInput");
 
@@ -148,15 +152,18 @@ function addNewPost() {
         <button class="btn btn-danger view-anyway">View Anyway</button>
   
         `;
+
+
     cardFooter.appendChild(textOverCardDiv);
 
     // Attach click event to "View Anyway" button for user-added posts
     var viewAnywayButton = textOverCardDiv.querySelector(".view-anyway");
     viewAnywayButton.addEventListener("click", handleViewAnywayButtonClick);
-    if (filters && filters !== "") {
+    if (filters && filters !== "[]") {
             const caption = captionInput.value;
             console.log(caption)
-            const result = performPostRequest(caption, filters);
+            const result = await performAsyncPostRequest(caption, filters);
+            console.log("result of the new post", result);
 
             if (result && result.filtered === "0") {
                 newCard.classList.add('good-post');
